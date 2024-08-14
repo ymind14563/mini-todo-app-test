@@ -1,0 +1,11 @@
+{
+  "development": {
+    "username": "user",
+    "password": "12345678",
+    "database": "codingon2",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {},
+  "production": {}
+}
