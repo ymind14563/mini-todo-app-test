@@ -13,10 +13,15 @@
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# .env.local
+# .env.development.local
+# .env.test.local
+# .env.production.local
+
+# 기본적으로 .env 파일은 중요한 내용들이라 
+# .gitignore에서 관리하여 업로드 되지 않도록 하지만
+# 연습으로하는 프로젝트라는 이유와 함께 
+# 정말 기본적인 로컬 정보 외에는 추가적인 정보가 없기에 업로드함.
 
 npm-debug.log*
 yarn-debug.log*

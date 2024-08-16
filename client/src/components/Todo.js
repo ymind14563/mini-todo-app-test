@@ -1,24 +1,27 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import '../styles/Todo.scss'
 
-export default function Todo({ item, deleteItem }) {
+export default function Todo({ item, deleteItem, updateItem }) {
     console.log('item >>>>', item); // {id: 1, title: 'my todo1', done: false}
 
     const [ todoItem, setTodoItem ] = useState(item);
     const [ readOnly, setReadOnly ] = useState(true);
 
-    const onDeleteButtonClick = () => {
+    const onDeleteButtonClick = useCallback(() => {
         deleteItem(todoItem);
-    };
+    }, [deleteItem]);
 
     // title 클릭 시 실행될 함수 : readOnly를 false로 변경
-    const offReadOnlyMode = () => {
+    const offReadOnlyMode = useCallback(() => {
         setReadOnly(false);
-    }
+    }, []);
 
     // readOnly true: enter키 누르면 readOnly를 true로 변경
     const enterKeyEventHandler = (e) => {
         if(e.key === 'Enter') {
             setReadOnly(true);
+            
+            updateItem(todoItem); // [백엔드, 프론트 API 연결] 수정 1 - 엔터 누르면 저장
         }
     }
 
@@ -27,19 +30,28 @@ export default function Todo({ item, deleteItem }) {
     const editEventHandler = (e) => {
         // rest: id, done 정보
         const { title, ...rest } = todoItem;
-        setTodoItem({
+        // setTodoItem({
+        //     title: e.target.value,
+        //     ...rest
+        // });
+        const updatedItem = {
             title: e.target.value,
             ...rest
-        });
+        }
+        setTodoItem(updatedItem);
+        updateItem(updatedItem);
     }
 
     // checkbox 업데이트
     const checkboxEventHandler = (e) => {
+        // rest: id, title 
         const { done, ...rest } = todoItem;
-        setTodoItem({
+        const updatedItem = {
             done: e.target.checked,
             ...rest
-        })
+        }
+        setTodoItem(updatedItem);
+        updateItem(updatedItem); // [백엔드, 프론트 API 연결] 수정 2 - 체크 박스 변경 시 저장
     }
 
   return (

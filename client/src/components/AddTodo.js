@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import '../styles/AddTodo.scss'
 
 export default function AddTodo( { addItem }) {
     const [ todoItem, setTodoItem ] = useState({
@@ -14,15 +15,17 @@ export default function AddTodo( { addItem }) {
 
     const enterKeyEventHandler = (e) => {
         if(e.key === 'Enter') {
-            addItem(todoItem); // add 함수 사용.
-            setTodoItem({
-                title: '' // 상태 초기화
-            })
+            onButtonClick();
+            // addItem(todoItem); // add 함수 사용.
+            // setTodoItem({
+            //     title: '' // 상태 초기화
+            // })
+            // 참고: 한글 마지막 글자 남는 문제 - https://buly.kr/H6g9xSc
         }
     }
 
   return (
-    <div className='addTodo'>
+    <div className='AddTodo'>
         <input 
             type="text" 
             placeholder='Add your new Todo !!'
